@@ -1,0 +1,154 @@
+
+{
+    "summary": "Profile of Reseller",
+    "description": "Reseller Profile",
+    "tags": ["Users - Private"],
+    "headers": {
+        "type": "object",
+        "required": ["Authorization"],
+        "properties": {
+            "Authorization": {
+                "type": "string",
+                "description": "Token given by loginr"
+            }
+        },
+        "example": {
+            "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJoYWRpa3VudGpvcm9AeWFob28uY29tXzRfbXVzdGlrYXJhdHUiLCJpZCI6IjExMjE1OTA4ODE2NzM1NDgiLCJ1c2VyX2VtYWlsIjoiaGFkaWt1bnRqb3JvQHlhaG9vLmNvbSIsInVzZXJfbmFtZSI6IkhhZGkgS3VuY29ybyIsImlhdCI6MTU5MDg4MTY3MywiZXhwIjoxNTkwOTI0ODczfQ.gs0wZQ9rOU_seyCFQ2iNUtqCR7096Ez02l2CfdXeTmQ"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "required": ["status", "user", "token", "img_signature"],
+            "properties": {
+                "status": {"type": "string"},
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "user_data": {
+                            "tyep": "object",
+                            "properties": {
+                                "firstname": {"type": "string", "description": "key used by internal system"},
+                                "name": {"type": "string", "description": "Name of user"},
+                                "email": {"type": "string", "format": "email", "description": "User email"},
+                                "phone": {"type": "string", "description": "Phone Number"}
+                            }
+                        },    
+                        "store_data": {
+                            "type": "object", 
+                            "properties": {
+                                "name": {"type": "string", "description": "Name of Store"},
+                                "store_name": {"type": "string", "description": "store url"},
+                                "address": {
+                                    "type": "object",
+                                    "properties": {
+                                        "address_line1": {"type": "string"},
+                                        "address_line2": {"type": "string"},
+                                        "city": {"type": "string"},
+                                        "province": {"type": "string"},
+                                        "country": {"type": "string"},
+                                        "country_id": {"type": "integer"},
+                                        "area_id": {"type": "integer"},
+                                        "area_level": {"type": "string", "enum": ["country", "province", "city", "district", "sub_district"]}
+                                    }
+                                },
+                                "profile_url": {"type": "string"}                                        
+                            }
+                        },
+                        "url": {"type": "string", "enum": ["admin", "vendor", "seller", "user"], "description": "Role of user"},
+                        "id": {"type": "string", "description": "current session id"},
+                        "store_url": {"type": "string", "description": "url of seller store if role is seller. only for seller user"},
+                        "store_id": {"type": "string", "description": "store_id of seller store if role is seller. only for seller user"},
+                        "vendor": {"type": "string", "description": "Vendor name"}
+                    }
+                }
+
+            },
+            "example": {
+                "status": "ok",
+                "data": {
+                    "user_data": {
+                        "firstname": "Han",
+                        "name": "Juang",
+                        "email": "han.juang@powercommerce.asia",
+                        "phone": "081881818181"
+                    },
+                    "store_data": {
+                        "name": "Han Juang",
+                        "store_name": "hanjuang",
+                        "address": {
+                            "address_line1": "Jl. Mampang Prapatan Raya 84a",
+                            "address_line2": "RT 12/08",
+                            "sub_district": "Tegal Parang",
+                            "district": "Mampang Prapatan",
+                            "city": "Jakarta Selatan",
+                            "province": "DKI Jakarta",
+                            "country": "Indonesia",
+                            "country_id": 228,
+                            "area_id": 12897
+                        },
+                        "profile_url": "/users/profile"
+                    },
+                    "url": "https://mekar.resellermustikaratu.com"
+                }
+            }
+        },
+        "401": {
+            "description": "Unauthorized Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "UnauthorizedError",
+                "message": "Password not match!"
+            }
+        },
+        "404": {
+            "description": "Notfound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "storeId: nKMHlkjhglkjG unknown!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

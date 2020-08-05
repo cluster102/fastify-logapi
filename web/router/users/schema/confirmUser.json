@@ -1,0 +1,132 @@
+
+{
+    "summary": "Register confirmation for user",
+    "description": "Register confirmation function",
+    "tags": ["Users"],
+    "headers": {
+        "type": "object",
+        "required": ["storeId"],
+        "properties": {
+            "storeId": {
+                "type": "string",
+                "description": "Id of store"
+            }
+        },
+        "example": {
+            "storeId": "nKMHlkjhglkjG"
+        }
+    },
+    "body": {
+        "type": "object",
+        "required": ["user_email", "user_password", "link"],
+        "properties": {
+            "user_email": {
+                "type": "string",
+                "format": "email",
+                "description": "Email user"
+            },
+            "user_password": {
+                "type": "string",
+                "description": "Password"
+            },
+            "link": {
+                "type": "string",
+                "description": "Given link for confirmation"
+            }
+        },
+        "example": {
+            "user_email": "test@powercommerce.asia",
+            "user_password": "Default",
+            "vendor_name": "mustikaratu",
+            "link": "sjhlaiushdlkajhsdjk4765476547654"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "required": ["status", "customer_id", "user", "token"],
+            "properties": {
+                "status": {"type": "string"},
+                "customer_id": {"type": "string", "format": "uuid"},
+                "user": {
+                    "type": "object",
+                    "properties": {
+                        "key": {"type": "string", "description": "key used by internal system"},
+                        "user_name": {"type": "string", "description": "Name of user"},
+                        "user_email": {"type": "string", "format": "email"},
+                        "id": {"type": "string", "description": "current session id"}
+                    }
+                },
+                "token": {"type": "string", "description": "token to be used by next command or request"}
+            },
+            "example": {
+                "status": "ok",
+                "customer_id": "bead012d-d41c-4987-a41c-191953347192",
+                "user": {
+                    "key": "test@powercommerce.asia_5_vGlkjghlknblihbnkj",
+                    "user_name": "Juang",
+                    "user_email": "test@powercommerce.asia",
+                    "id": "1260980938640986709"
+                },
+                "token": "hladhflkjahsdf.kajshdflkjahsdlkjfhlakjhsdflkjahsdflkjahsdlfkjhalksjdfhlkajhhsdf"
+            }
+        },
+        "401": {
+            "description": "Unauthorized Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "UnauthorizedError",
+                "message": "Password Not Match!"
+            }
+        },
+        "404": {
+            "description": "Nofound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "storeId: nKMHlkjhglkjG unknown!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

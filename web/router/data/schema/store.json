@@ -1,0 +1,227 @@
+
+{
+    "summary": "Admin data",
+    "description": "Data Function",
+    "tags": ["Data"],
+    "response": {
+            "200": {
+                "description": "Succesful response",
+                "type": "object",
+                "required": ["status", "user", "link", "token"],
+                "properties": {
+                    "status": {"type": "string"},
+                    "message": {
+                        "type": "object",
+                        "required": ["vendor_hashid", "seller_type", "vendor_name", "website_title"],
+                        "properties": {
+                            "vendor_hashid": { "type": "string" },
+                            "seller_type": { "type": "string", "enum": ["vendor", "seller"] },
+                            "vendor_name": { "type": "string" },
+                            "website_title": { "type": "string" },
+                            "logo_url": { "type": "string" }
+                        }        
+                    },
+                    "country_code": {"type": "string"}
+                },
+                "example": {
+                    "seller_id":"nKm1OoRWrdpXJV4g",
+                    "lang_default":"id",
+                    "lang_available":["en","id"],
+                    "ga_id":"UA-150971043-1",
+                    "gtag_id":null,
+                    "pixel_id":"2618288511786605",
+                    "seller_type":"vendor",
+                    "store_name":"Mustika Ratu",
+                    "phone_number":null,
+                    "phone_hotline":"+628 119 3333 94",
+                    "email_contact":"info@mustikaratushop.com",
+                    "social_media":{
+                        "fb":"https://www.facebook.com/mustikaratuIND/",
+                        "ig":"https://www.instagram.com/mustikaratuind/?hl=en",
+                        "youtube":"https://www.youtube.com/channel/UCCaNz6uvNbxRikriIDu3R8w"
+                    },
+                    "website_title":"Mustika Ratu Official Store",
+                    "website_description":"Mustika Ratu Reseller Official Store",
+                    "reseller_url":"https://admin.resellermustikaratu.com",
+                    "about_us":"&amp;lt;a href=\"https://mustika-ratu.co.id\"&amp;gt;https://mustika-ratu.co.id/&amp;lt;/a&amp;gt; ",
+                    "address":{
+                        "address_line1":"Jl Raya Bogor Km 26.4",
+                        "address_line2":"",
+                        "subdistrict":"Ciracas",
+                        "district":"Ciracas",
+                        "city":"Jakarta Timur",
+                        "province":"DKI Jakarta",
+                        "country":"Indonesia"
+                    },
+                    "logo_url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/logo_Mustika_Ratu__ct0x43mT.png",
+                    "banner_url":[{
+                            "url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/20200526_MR_puteri_mPY0N__FN.jpg",
+                            "dest_url":"/shop/puteri/lips"
+                        },
+                        {
+                            "url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/20200526_MR_jangan_panik_Bzirrizur.jpg",
+                            "dest_url":"/search?q=gel"
+                        },
+                        {
+                            "url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/20200526_MR_covid_pJ3OTrxv8.jpg",
+                            "dest_url":"/search?q=wedang"
+                        },
+                        {
+                            "url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/Flawless_kit_package_1200x600_TJC6hmFDo.jpg",
+                            "dest_url":"/product/02091b3c-0e89-401c-a1c1-7dad3e646034"
+                        },
+                        {
+                            "url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/freshkit_package_1200x600_TciZtDT0K.jpg",
+                            "dest_url":"/product/a1faf66d-25e5-49e4-9aeb-1b6cfb38d966"
+                        },
+                        {
+                            "url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/healthy_inside_package_1200x600_lMxI1_I3f.jpg",
+                            "dest_url":"/product/f7084ebd-6569-4528-8a76-68fd2dffdcdd"
+                        },
+                        {
+                            "url":"https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/BANNER---1200-x-600px__zTr0fh4n.jpg",
+                            "dest_url":"/"
+                        }
+                    ],
+                    "page_url":"",
+                    "styles":{
+                        "custom":"body{--theme-primary:#65cc99;--theme-secondary:#212529;--theme-tertiary:#1ea561;--menu-bg:#fff;--menu-color:#212529;--price:#f24d01}.header .sticky-icon-group{color:#000}.ajaxcart ul{max-height:calc(100vh - 200px);margin-left:-15px;margin-right:-15px;overflow-y:scroll;margin-bottom:1rem;margin-top:10px;border-bottom:1px dashed #eaeaea;padding-left:10px;padding-right:10px}@media only screen and (min-width:992px){.header .main-menu ul li{margin:0}.header .main-menu ul&amp;gt;li&amp;gt;a{font-size:.85rem;transition:all .2s ease-in;padding-left:.75rem;padding-right:.75rem;letter-spacing:.3px}.header .main-menu ul li a:hover{color:#666;transform:translateY(-1px)}.header .main-menu ul.megamenu&amp;gt;li&amp;gt;a,.header .main-menu ul.megamenu&amp;gt;li&amp;gt;a strong{font-weight:600}ul.megamenu&amp;gt;li.with-sub-menu&amp;gt;a:after{padding-left:.45rem}.header .sticky-icon-group{padding-left:1rem;margin-left:0!important;margin-right:.75rem;position:relative}.header .main-menu .container{padding:0!important}}.product-grid .product .btn-cart{background-color:var(--theme-secondary)!important;color:#fff;border-color:var(--theme-secondary);border-radius:5rem;padding-left:1.5rem;padding-right:1.5rem}.product-grid .product .btn-cart:active,.product-grid .product .btn-cart:focus,.product-grid .product .btn-cart:hover{background-color:#fff!important;color:var(--theme-secondary);border-color:var(--theme-secondary)}.product-info .cart .add-to-cart .button{background:var(--theme-secondary);border-color:var(--theme-secondary);color:#fff}.product-info .cart .add-to-cart .button:hover{background:#fff;border-color:var(--theme-secondary);color:var(--theme-secondary)}.product-info .cart .add-to-cart .button.disabled{opacity:.8;background:#fff}.footer-area .social-icons&amp;gt;*{width:25px;height:25px;display:flex;justify-content:center;align-items:center;border-radius:50rem;background:#fff;margin-right:.45rem;box-shadow:0 3px 8px rgba(0,0,0,.15)}.footer-area .social-icons&amp;gt;:hover{transform:translateY(-.15rem)}.footer-area .social-icons svg{max-width:20px;max-height:20px;width:17px;height:17px}.footer-area .copyright-area{background-color:transparent;border-top:1px solid #e0e4ec}"
+                    },
+                    "categoriebanner_url":[],
+                    "category_list":[
+                        {"id":17, "parent_id":0,"category_name":"Personal Care","category_slug":"personal-care","category_order":0},
+                        {"id":18,"parent_id":17,"category_name":"Body Care","category_slug":"body-care","category_order":0},
+                        {"id":20,"parent_id":18,"category_name":"Body Butter","category_slug":"body-butter","category_order":0},
+                        {"id":23,"parent_id":21,"category_name":"Cleanser","category_slug":"cleanser","category_order":0},
+                        {"id":537,"parent_id":536,"category_name":"Face Mist","category_slug":"face-mist","category_order":0},
+                        {"id":26,"parent_id":24,"category_name":"Shampoo","category_slug":"shampoo","category_order":0},
+                        {"id":543,"parent_id":542,"category_name":"Toothpaste","category_slug":"toothpaste","category_order":0},
+                        {"id":544,"parent_id":29,"category_name":"Face","category_slug":"face","category_order":0},
+                        {"id":549,"parent_id":544,"category_name":"Cleanser","category_slug":"cleanser","category_order":0},
+                        {"id":551,"parent_id":550,"category_name":"Dynamic Duo","category_slug":"dynamic-duo","category_order":0},
+                        {"id":553,"parent_id":552,"category_name":"Eyebrow","category_slug":"eyebrow","category_order":0},
+                        {"id":558,"parent_id":557,"category_name":"Lipcream","category_slug":"lipcream","category_order":0},
+                        {"id":562,"parent_id":560,"category_name":"Limited Edition Palette P1","category_slug":"limited_edition_palette_p1","category_order":0},
+                        {"id":563,"parent_id":27,"category_name":"Body Fragrance","category_slug":"body-fragrance","category_order":0},
+                        {"id":564,"parent_id":563,"category_name":"Body Splash","category_slug":"body-splash","category_order":0},
+                        {"id":567,"parent_id":28,"category_name":"Body Care","category_slug":"body-care","category_order":0},
+                        {"id":568,"parent_id":567,"category_name":"Body Scrub","category_slug":"body-scrub","category_order":0},
+                        {"id":569,"parent_id":30,"category_name":"Herbal Tea","category_slug":"herbal-tea","category_order":0},
+                        {"id":571,"parent_id":570,"category_name":"Suplement","category_slug":"suplement","category_order":0},
+                        {"id":575,"parent_id":573,"category_name":"Loose Powder","category_slug":"loose_powder","category_order":0},
+                        {"id":578,"parent_id":574,"category_name":"Lip Tint","category_slug":"lip_tint","category_order":0},
+                        {"id":587,"parent_id":586,"category_name":"Body Fragrance","category_slug":"body_fragrance","category_order":0},
+                        {"id":590,"parent_id":587,"category_name":"Sun Odor","category_slug":"sun_odor","category_order":0},
+                        {"id":592,"parent_id":588,"category_name":"Face Care","category_slug":"face_care","category_order":0},
+                        {"id":593,"parent_id":589,"category_name":"Hair Stylish","category_slug":"hair_stylish","category_order":0},
+                        {"id":598,"parent_id":30,"category_name":"Bundling","category_slug":"bundling","category_order":0},
+                        {"id":527,"parent_id":24,"category_name":"Hair Conditioner","category_slug":"hair-conditioner","category_order":1},
+                        {"id":532,"parent_id":21,"category_name":"Face Wash","category_slug":"face-wash","category_order":1},
+                        {"id":21,"parent_id":17,"category_name":"Face Care","category_slug":"face-care","category_order":1},
+                        {"id":538,"parent_id":18,"category_name":"Body Scrub","category_slug":"body-scrub","category_order":1},
+                        {"id":29,"parent_id":0,"category_name":"Make Up","category_slug":"make-up","category_order":1},
+                        {"id":547,"parent_id":544,"category_name":"Compact Powder","category_slug":"compact-powder","category_order":1},
+                        {"id":550,"parent_id":29,"category_name":"Eye and Lips","category_slug":"eye-and-lips","category_order":1},
+                        {"id":554,"parent_id":552,"category_name":"Eyeliner","category_slug":"eyeliner","category_order":1},
+                        {"id":559,"parent_id":557,"category_name":"Lipstick","category_slug":"lipstick","category_order":1},
+                        {"id":565,"parent_id":563,"category_name":"Body Spray","category_slug":"body-spray","category_order":1},
+                        {"id":570,"parent_id":30,"category_name":"Jamu Pria","category_slug":"jamu-pria","category_order":1},
+                        {"id":576,"parent_id":573,"category_name":"Compact Powder","category_slug":"compact_powder","category_order":1},
+                        {"id":588,"parent_id":586,"category_name":"Face Care","category_slug":"face_care","category_order":1},
+                        {"id":591,"parent_id":587,"category_name":"Body Cologne","category_slug":"body_cologne","category_order":1},
+                        {"id":594,"parent_id":574,"category_name":"Lip Cream","category_slug":"lip_cream","category_order":1},
+                        {"id":659,"parent_id":542,"category_name":"Obat Kumur","category_slug":"obat-kumur","category_order":1},
+                        {"id":528,"parent_id":24,"category_name":"Hair Oil","category_slug":"hair-oil","category_order":2},
+                        {"id":19,"parent_id":18,"category_name":"Massage Oil","category_slug":"massage-oil","category_order":2},
+                        {"id":534,"parent_id":21,"category_name":"Foundation","category_slug":"foundation","category_order":2},
+                        {"id":24,"parent_id":17,"category_name":"Hair Care","category_slug":"hair-care","category_order":2},
+                        {"id":27,"parent_id":0,"category_name":"Puteri","category_slug":"puteri","category_order":2},
+                        {"id":546,"parent_id":544,"category_name":"Concelear","category_slug":"concelear","category_order":2},
+                        {"id":552,"parent_id":29,"category_name":"Eye","category_slug":"eye","category_order":2},
+                        {"id":555,"parent_id":552,"category_name":"Mascara","category_slug":"mascara","category_order":2},
+                        {"id":566,"parent_id":563,"category_name":"Body Cologne","category_slug":"body-cologne","category_order":2},
+                        {"id":572,"parent_id":30,"category_name":"Slimming","category_slug":"slimming","category_order":2},
+                        {"id":574,"parent_id":27,"category_name":"Lips","category_slug":"lips","category_order":2},
+                        {"id":577,"parent_id":573,"category_name":"Two Way Cake","category_slug":"two_way_cake","category_order":2},
+                        {"id":589,"parent_id":586,"category_name":"Hair Care","category_slug":"hair_care","category_order":2},
+                        {"id":533,"parent_id":21,"category_name":"Moisturizer","category_slug":"moisturizer","category_order":3},
+                        {"id":25,"parent_id":24,"category_name":"Hair Tonic","category_slug":"hair-tonic","category_order":3},
+                        {"id":539,"parent_id":18,"category_name":"Soap Bar","category_slug":"soap-bar","category_order":3},
+                        {"id":28,"parent_id":0,"category_name":"Ratu Mas","category_slug":"ratu-mas","category_order":3},
+                        {"id":542,"parent_id":17,"category_name":"Oral Care","category_slug":"oral-care","category_order":3},
+                        {"id":545,"parent_id":544,"category_name":"Foundation","category_slug":"foundation","category_order":3},
+                        {"id":556,"parent_id":552,"category_name":"Blush On and Eyeshadow","category_slug":"blush-on-and-eyeshadow","category_order":3},
+                        {"id":557,"parent_id":29,"category_name":"Lips","category_slug":"lips","category_order":3},
+                        {"id":595,"parent_id":586,"category_name":"Gift","category_slug":"gift","category_order":3},
+                        {"id":529,"parent_id":24,"category_name":"Hair Mask","category_slug":"hair-mask","category_order":4},
+                        {"id":531,"parent_id":21,"category_name":"Peeling","category_slug":"peeling","category_order":4},
+                        {"id":540,"parent_id":18,"category_name":"Shower Gel","category_slug":"shower-gel","category_order":4},
+                        {"id":30,"parent_id":0,"category_name":"Jamu","category_slug":"jamu","category_order":4},
+                        {"id":548,"parent_id":544,"category_name":"Loose Powder","category_slug":"loose-powder","category_order":4},
+                        {"id":560,"parent_id":29,"category_name":"Palette","category_slug":"palette","category_order":4},
+                        {"id":585,"parent_id":552,"category_name":"Palette","category_slug":"palette","category_order":4},
+                        {"id":596,"parent_id":30,"category_name":"Ready To Drink","category_slug":"ready-to-drink","category_order":4},
+                        {"id":530,"parent_id":21,"category_name":"Toner","category_slug":"penyegar","category_order":5},
+                        {"id":541,"parent_id":18,"category_name":"Hand Body Lotion","category_slug":"hand-body-lotion","category_order":5},
+                        {"id":582,"parent_id":544,"category_name":"Contour and Highlight","category_slug":"contour_and_highlight","category_order":5},
+                        {"id":586,"parent_id":0,"category_name":"Bask","category_slug":"bask","category_order":5},
+                        {"id":597,"parent_id":30,"category_name":"Wedang","category_slug":"wedang","category_order":5},
+                        {"id":535,"parent_id":21,"category_name":"Face Mask","category_slug":"face-mask","category_order":6},
+                        {"id":579,"parent_id":18,"category_name":"Roll On","category_slug":"roll_on","category_order":6},
+                        {"id":583,"parent_id":544,"category_name":"Palette","category_slug":"palette","category_order":6},
+                        {"id":580,"parent_id":21,"category_name":"Loose Powder","category_slug":"loose_powder","category_order":7},
+                        {"id":581,"parent_id":21,"category_name":"Two Way Cake","category_slug":"two_way_cake","category_order":8}
+                    ],
+                    "payment_methode":[
+                        {"id":"ck39anmff000001l00aue6p9h","methode_title":"BCA Virtual Account","methode_name":"sprint_bca_va","group_name":"Virtual Account","group_sort":1},
+                        {"id":"ck3r0e7xz000201jq3xbvh1pk","methode_title":"BNI Virtual Account","methode_name":"sprint_bni_va","group_name":"Virtual Account","group_sort":1},
+                        {"id":"ck3r453lx000101l83uldfmwx","methode_title":"Mandiri Virtual Account","methode_name":"sprint_mandiri_va","group_name":"Virtual Account","group_sort":1},
+                        {"id":"ck4i98j8w000101l06wg2ecxq","methode_title":"BRI Virtual Account","methode_name":"sprint_bri_va","group_name":"Virtual Account","group_sort":1},
+                        {"id":"ck63d16lp000101ku44154pa4","methode_title":"Permata Virtual Account","methode_name":"sprint_permata_va","group_name":"Virtual Account","group_sort":1}
+                    ]
+                }
+            },
+            "404": {
+                "description": "Nofound Error",
+                "type": "object",
+                "properties": {
+                    "status": {"type": "string", "description": "fail"},
+                    "name": {"type": "string", "description": "UnauthorizedError"},
+                    "message": {"type": "string", "description": "Error description"}
+                },
+                "example": {
+                    "status": "fail",
+                    "name": "NotFoundError",
+                    "message": "Email not found!"
+                }
+            },
+            "422": {
+                "description": "Bad request, one or more param not included, or not match",
+                "type": "object",
+                "properties": {
+                    "status": {"type": "string", "description": "fail"},
+                    "name": {"type": "string", "description": "BadRequestError"},
+                    "message": {"type": "string", "description": "Error description"}
+                },
+                "example": {
+                    "status": "fail",
+                    "name": "BadRequestError",
+                    "message": "Missing storeId attribute!"
+                }
+            },
+            "500": {
+                "description": "Error on internal system",
+                "type": "object",
+                "properties": {
+                    "status": {"type": "string", "description": "fail"},
+                    "name": {"type": "string", "description": "InternalServerError"},
+                    "message": {"type": "string", "description": "Error description"}
+                },
+                "example": {
+                    "status": "fail",
+                    "name": "InternalServerError",
+                    "message": "Database error!"
+                }
+            }
+    }
+}

@@ -1,0 +1,219 @@
+{
+    "summary": "Get Transaction Summary",
+    "description": "Get Transaction Summary",
+    "tags": ["Data - Private"],
+    "headers": {
+        "type": "object",
+        "required": ["Authorization"],
+        "properties": {
+            "Authorization": {
+                "type": "string",
+                "description": "Token given by login"
+            }
+        },
+        "example": {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJtckBwb3dlcmNvbW1lcmNlLmFzaWFfM19tdXN0aWthcmF0dSIsImlkIjoiMzE1OTA0ODExNjY0ODAiLCJ1c2VyX2VtYWlsIjoibXJAcG93ZXJjb21tZXJjZS5hc2lhIiwidXNlcl9uYW1lIjoiTXVzdGlrYSBSYXR1IiwiaWF0IjoxNTkwNDgxMTY2LCJleHAiOjE1OTA1MjQzNjZ9.TBoQailsh2M9ajkSEgumAiulL2dq_QyMdEMqLou4vdE"
+        }
+    },
+    "querystring": {
+        "type": "object",
+        "required": ["timezone"],
+        "properties": {
+            "timezone": {
+                "type": "string",
+                "description": "Time Format example +07:00 for zone asia/jakarta"
+            }
+        },
+        "example": {
+            "timezone": "+07:00"
+        }
+    },    
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "required": ["status", "lastItems", "orderSummary", "graphSummary"], 
+            "properties": {
+                "status": {"type": "string"},
+                "lastItems": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["name", "product_id", "description", "status", "catalog_id", "created_at", "url"],
+                        "properties": {
+                            "name": {"type": "string", "description": "Product Name"},
+                            "product_id": {"type": "string", "format": "uuid"},
+                            "description": {
+                                "type": "object",
+                                "required": ["detail_shortdesc", "lang"],
+                                "properties": {
+                                    "detail_shortdesc": {"type": "string", "description": "create date"},
+                                    "lang": {"type": "string", "description": "code of language"}
+                                }
+                            },
+                            "status": {"type": "string", "description": "Status of order"},
+                            "catalog_id": {"type": "string", "format": "uuid", "description": "id of catalog"},
+                            "created_at": {"type": "string", "description": "create date"},
+                            "url": {"type": "string", "description": "url of product image"}
+                        }
+                    }
+                },
+                "orderSummary": {
+                    "type": "object",
+                    "required": ["order_pending_qty", "order_onprocess_qty", "order_completed_qty", "order_retourreq_qty"],
+                    "properties": {
+                        "order_pending_qty": {"type": "integer", "description": "Order waiting payment"},
+                        "order_onprocess_qty": {"type": "integer", "description": "Order on process"},
+                        "order_completed_qty": {"type": "integer", "description": "Finished order"},
+                        "order_retourreq_qty": {"type": "integer", "description": "order on retour / cancel request"}
+                    }
+
+                },
+                "graphSummary": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "sales_day": {"type": "string", "description": "item key"},
+                            "total_amount": {"type": "integer", "description": "total amount"},
+                            "total_order": {"type": "integer", "description": "total order"}
+                        }
+                    }
+                },
+                "commissions": {
+                    "type": "object",
+                    "required": ["ewallet", "commission", "commission_should_pay"],
+                    "properties": {
+                        "ewallet": {"type": "integer", "description": "current amount wallet"},
+                        "commission": {"type": "integer", "description": "Received commission"},
+                        "commission_should_pay": {"type": "integer", "description": "commission will receive if order delivered"}
+                    }
+                }
+            },
+
+            "example": {
+                "status": "ok",
+                "lastItems": [{
+                    "name": "Wedang Kunir Asem",
+                    "product_id": "1ecdfce7-6339-4c6c-827f-8e9fb1d5b7b7",
+                    "description": {
+                        "detail_shortdesc": "Minuman sehat instant dari bahan alami yang tersedia dalam bentuk serbuk   Bahan: Curcumae domestica Rhizoma, Tamarindi pulpa, Gula Alami   Manfaat: Membantu sirkulasi darah, melancarkan haid dan membantu meredakan nyeri pada saat haid ",
+                        "lang": "id"
+                    },
+                    "status": "sent",
+                    "catalog_id": "6d4347e0-6689-11ea-ae71-9be7fb97f58c",
+                    "created_at": "2020-03-18 05:59:16",
+                    "url": "https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/product/1ecdfce7-6339-4c6c-827f-8e9fb1d5b7b7/kunir_asam__Up5-4J4Eq.jpg"
+                },{
+                    "name": "Wedang Jahe Merah",
+                    "product_id": "a5ff7110-668b-11ea-ae71-9be7fb97f58c",
+                    "description": {
+                        "detail_shortdesc": "Minuman sehat instan 100% bahan alami yang tersedia dalam bentuk serbuk, berkhasiat untuk membantu memelihara kesehatan fungsi hati, diproses dengan teknologi UHT",
+                        "lang": "id"
+                    },
+                    "status": "sent",
+                    "catalog_id": "a5ff7110-668b-11ea-ae71-9be7fb97f58c",
+                    "created_at": "2020-03-18 05:59:16",
+                    "url": "https://ik.imagekit.io/powerbiz/img/nKm1OoRWrdpXJV4g/product/1ecdfce7-6339-4c6c-827f-8e9fb1d5b7b7/Jahe_merah__77mWq8zxe.jpg"
+                }],
+                "orderSummary": {
+                    "order_pending_qty": "10",
+                    "order_onprocess_qty": "125",
+                    "order_completed_qty": "2400",
+                    "order_retourreq_qty": "7"
+                },
+                "graphSummary": [{
+                    "sales_day": "Sunday",
+                    "total_amount": "125",
+                    "total_order": "2400"
+                },{
+                    "sales_day": "Monday",
+                    "total_amount": "125",
+                    "total_order": "2400"
+                },{
+                    "sales_day": "Tuesday",
+                    "total_amount": "125",
+                    "total_order": "2400"
+                }, {
+                    "sales_day": "Wednesday",
+                    "total_amount": "125",
+                    "total_order": "2400"
+                }, {
+                    "sales_day": "Thursday",
+                    "total_amount": "125",
+                    "total_order": "2400"
+                },{
+                    "sales_day": "Friday",
+                    "total_amount": "125",
+                    "total_order": "2400"
+                }, {
+                    "sales_day": "Saturday",
+                    "total_amount": "125",
+                    "total_order": "2400"
+                }],
+                "commissions": {
+                    "ewallet": "32000",
+                    "commission": "125000",
+                    "commission_should_pay": "76000"
+                }
+
+            }
+        },
+        "401": {
+            "description": "Unauthorized Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "UnauthorizedError",
+                "message": "Password not match!"
+            }
+        },
+        "404": {
+            "description": "Notfound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "storeId: nKMHlkjhglkjG unknown!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

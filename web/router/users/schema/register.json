@@ -1,0 +1,103 @@
+{
+    "description": "User register function for user, seller and vendor",
+    "tags": ["Users"],
+    "summary": "Register",
+    "headers": {
+        "type": "object",
+        "properties": {
+            "storeId": {
+                "type": "string",
+                "description": "Id of store, only required if user_role as user"
+            }
+        },
+        "example": {
+            "storeId": "nKMHlkjhglkjG"
+        }
+    },
+    "body": {
+        "type": "object",
+        "required": ["user_firstname", "user_name", "user_email", "user_role", "user_password"],
+        "properties": {
+            "user_firstname": {
+                "type": "string", "description": "First Name"
+            },
+            "user_name": {
+                "type": "string", "description": "Last Name"
+            },
+            "user_email": {
+                "type": "string", "format": "email", "description": "Email user"
+            },
+            "user_role": {
+                "type": "string",
+                "enum": ["seller", "vendor", "user"],
+                "description": "User role"
+            },
+            "user_password": {
+                "type": "string", "description": "Password"
+            },
+            "vendor_name": {
+                "type": "string", "description": "Vendor name, mandatory for vendor and seller"
+            },
+            "user_phone": {
+                "type": "string", "description": "phone number, only for user-role"
+            }
+        },
+        "example": {
+            "user_firstname": "Han",
+            "user_name": "Juang",
+            "user_email": "han.juang@gamil.com",
+            "user_role": "seller",
+            "user_password": "test123",
+            "vendor_name": "mustikaratu"
+        }
+    },
+    "response": {
+        "201": {
+            "description": "Succesful response",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "response status, ok"},
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "user_id": {"type": "string", "description": "used by success notification"}
+                    }
+                },
+                "message": {"type": "string"}
+            },
+            "example": {
+                "status": "ok",
+                "data": { "user_id": "nHlkjhkjhgkjhg" },
+                "message": "successfully created user Juang"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "User email han.juang@gamil.com already registerd!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

@@ -1,0 +1,158 @@
+{
+    "summary": "Change / Update existing Voucher",
+    "description": "Post Images",
+    "tags": ["Promotion - Private"],
+    "headers": {
+        "type": "object",
+        "required": ["Authorization"],
+        "properties": {
+            "Authorization": {
+                "type": "string",
+                "description": "Token given by loginr"
+            }
+        },
+        "example": {
+            "storeId": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJtckBwb3dlcmNvbW1lcmNlLmFzaWFfM19tdXN0aWthcmF0dSIsImlkIjoiMzE1OTA0ODExNjY0ODAiLCJ1c2VyX2VtYWlsIjoibXJAcG93ZXJjb21tZXJjZS5hc2lhIiwidXNlcl9uYW1lIjoiTXVzdGlrYSBSYXR1IiwiaWF0IjoxNTkwNDgxMTY2LCJleHAiOjE1OTA1MjQzNjZ9.TBoQailsh2M9ajkSEgumAiulL2dq_QyMdEMqLou4vdE"
+        }
+    },
+    "querystring": {
+        "type": "object",
+        "description": "only needed if user_role is user",
+        "properties": {
+            "page": { "type": "integer"},
+            "limit": { "type": "integer"},
+            "sort": {"type": "integer", "enum": ["newest", "oldes"]}
+        },
+        "example": {
+            "page": 2,
+            "limit": 50
+        }
+    },
+
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string"},
+                "message": {
+                    "type": "object",
+                    "required": ["code", "code", "type_id", "transaction_data", "validity", "f_combined", "f_allstore", "store_list", "qty"],
+                    "properties": {
+                        "code": {"type": "string"},
+                        "type_id": {"type": "integer", "description": "1: Transaction, 2: Product, 3: Courier"},
+                        "transaction_data": {
+                            "type": "object",
+                            "required": ["value", "type", "min_transaction", "max_discount"],
+                            "properties": {
+                                "value": {"type": "number" },
+                                "type": {"type": "integer", "enum": [1, 2], "description": "1 => percentage, 2 => Absolute"},
+                                "min_transaction": {"type": "number"},
+                                "max_discount": {"type": "number"}
+                            }
+                        },
+                        "validity": {
+                            "type": "object",
+                            "required": ["from", "until"],
+                            "properties": {
+                                "from": {"type": "string", "description": "Date Time ini UTC with format YYYY-MM-DDT00:00"},
+                                "until": {"type": "string","description": "Unix time stamp in UTC"}
+                            }
+                        },
+                        "f_combined": {"type": "boolean", "description": "Possbility of combined voucher, default false"},
+                        "f_allstore": {"type": "boolean", "description": "Validity voucher on all store owned by vendor include reseller storer"},
+                        "store_list": {
+                            "type": "array", 
+                            "itmes": {"type": "string", "description": "ID of Store, which these voucher valid for"}
+                        },
+                        "qty": {"type": "integer", "minimum": 1},
+                        "reference_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "string", 
+                                "description":"If coucher type of product, then reference_id is id of product in uuid"
+                            }
+                        }
+                    }
+                }
+            },
+            "example": {
+                "status": "ok",
+                "message": {
+                    "page": 1,
+                    "limit": 20,
+                    "total": 2,
+                    "data": [{
+                        "id": "bead012d-d41c-4987-a41c-191953347192",
+                        "code": "MUSTIARATU-CODE-012",
+                        "valid_from": "2010-06-06T12:00+00",
+                        "valid_until": "2010-07-06T12:00+00",
+                        "created_at": "2010-06-06T12:00+00"
+                    },{
+                        "id": "dead012d-d41c-4987-b41c-191953347192",
+                        "code": "MUSTIARATU-CODE-014",
+                        "valid_from": "2010-06-06T12:00+00",
+                        "valid_until": "2010-07-06T12:00+00",
+                        "created_at": "2010-06-06T12:00+00"
+                    }]
+                }
+            }
+        },
+        "401": {
+            "description": "Unauthorized Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "UnauthorizedError",
+                "message": "Password not match!"
+            }
+        },
+        "404": {
+            "description": "Notfound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "storeId: nKMHlkjhglkjG unknown!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

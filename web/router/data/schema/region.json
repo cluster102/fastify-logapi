@@ -1,0 +1,63 @@
+
+{
+    "summary": "Country list",
+    "description": "Data Function",
+    "tags": ["Data"],
+    "params": {
+        "type": "object",
+        "description": "only needed if user_role is user",
+        "properties": {
+            "store_id": {
+                "type": "string",
+                "description": "Id of store"
+            }
+        },
+        "example": {
+            "store_id": "AYGPQKbEmWb1gWLq"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "required": ["status", "list"],
+            "properties": {
+                "status": {"type": "string"},
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["value", "label"],
+                        "properties": {
+                            "value": { "type": "string", "format": "uuid" },
+                            "label": { "type": "string" },
+                            "code": { "type": "string" },
+                            "currency_code": { "type": "string" },
+                            "currency_id": { "type": "string" }
+                        }   
+                    }     
+                }
+            },
+            "example": {
+                "status": "ok",
+                "list": [ { "value": 1,"label": "Bank Mandiri Syariah" },
+                            { "value": 1,"label": "Bank Mandiri" },
+                            { "value": 1,"label": "Bank Central Asia" }]
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

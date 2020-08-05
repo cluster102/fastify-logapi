@@ -1,0 +1,82 @@
+
+{
+    "summary": "Admin data",
+    "description": "Data Function",
+    "tags": ["Data"],
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "required": ["status", "user", "link", "token"],
+            "properties": {
+                "status": {"type": "string"},
+                "message": {
+                    "type": "object",
+                    "required": ["vendor_hashid", "seller_type", "vendor_name", "website_title"],
+                    "properties": {
+                        "vendor_hashid": { "type": "string" },
+                        "seller_type": { "type": "string", "enum": ["vendor", "seller"] },
+                        "vendor_name": { "type": "string" },
+                        "website_title": { "type": "string" },
+                        "logo_url": { "type": "string" }
+                    }        
+                },
+                "country_code": {"type": "string"}
+            },
+            "example": {
+                "status": "ok",
+                "message": {
+                    "vendor_hashid": "AYGPQKbEmWb1gWLq",
+                    "seller_type": "vendor",
+                    "vendor_name": "mustikaratu",
+                    "website_title": "Mustika Ratu - Admin Page",
+                    "logo_url": "https://mustikaratuonline.com/img/AYGPQKbEmWb1gWLq/logo.jpg",
+                    "bg_url": "https://mustikaratuonline.com/img/AYGPQKbEmWb1gWLq/bg.jpg"
+                },
+                "country_code": "id"
+            }
+        },
+        "404": {
+            "description": "Nofound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "Email not found!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

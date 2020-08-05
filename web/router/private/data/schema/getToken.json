@@ -1,0 +1,97 @@
+{
+    "summary": "Get token",
+    "description": "get token for upload image",
+    "tags": ["Data - Private"],
+    "headers": {
+        "type": "object",
+        "required": ["Authorization"],
+        "properties": {
+            "Authorization": {
+                "type": "string",
+                "description": "Token given by loginr"
+            }
+        },
+        "example": {
+            "storeId": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJtckBwb3dlcmNvbW1lcmNlLmFzaWFfM19tdXN0aWthcmF0dSIsImlkIjoiMzE1OTA0ODExNjY0ODAiLCJ1c2VyX2VtYWlsIjoibXJAcG93ZXJjb21tZXJjZS5hc2lhIiwidXNlcl9uYW1lIjoiTXVzdGlrYSBSYXR1IiwiaWF0IjoxNTkwNDgxMTY2LCJleHAiOjE1OTA1MjQzNjZ9.TBoQailsh2M9ajkSEgumAiulL2dq_QyMdEMqLou4vdE"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string"},
+                "message": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["image_id", "image_name", "image_path", "ref_id", "type", "url", "image_redirecturl"],
+                        "properties": {
+                            "public_key": {"type": "string", "description": "file name of image"},
+                            "image_path": {"type": "string"},
+                            "token": {"type": "string", "description": "token"},
+                            "signature": {"type": "integer", "description": "signature"},
+                            "expire": {"type": "integer", "description": "Unix time stamp in utc"}
+                        }
+                    }
+                }
+            }        
+        },
+        "401": {
+            "description": "Unauthorized Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "UnauthorizedError",
+                "message": "Password not match!"
+            }
+        },
+        "404": {
+            "description": "Notfound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "storeId: nKMHlkjhglkjG unknown!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

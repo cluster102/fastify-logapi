@@ -1,0 +1,101 @@
+{
+    "summary": "Check if email registered or not",
+    "description": "User function",
+    "tags": ["Users"],
+    "headers": {
+        "type": "object",
+        "required": ["storeId"],
+        "properties": {
+            "storeId": {
+                "type": "string",
+                "description": "Id of store"
+            }
+        },
+        "example": {
+            "storeId": "nKMHlkjhglkjG"
+        }
+    },
+    "params": {
+        "type": "object",
+        "required": ["vendor_name"],
+        "properties": {
+            "vendor_name": {
+                "type": "string",
+                "description": "name of vendor from these store"
+            }
+        },
+        "example": {
+            "storeId": "mustikaratu"
+        }
+    },
+    "querystring": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+            "email": {
+                "type": "string",
+                "format": "email",
+                "description": "email to be checked"
+            }
+        },
+        "example": {
+            "storeId": "test@powercommerce.asia"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "enum": ["registered", "unregistered"]},
+                "id": {"type": "string", "format": "email"}
+            },
+            "example": {
+                "status": "registered",
+                "id": "test@powercommerce.asia"
+            }
+        },
+        "404": {
+            "description": "Nofound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "Link not found!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Link expired!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

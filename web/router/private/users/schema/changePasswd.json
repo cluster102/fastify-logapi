@@ -1,0 +1,92 @@
+{
+    "summary": "Password change function",
+    "description": "password change",
+    "tags": ["Users - Private"],
+    "headers": {
+        "type": "object",
+        "required": ["Authorization"],
+        "properties": {
+            "Authorization": {
+                "type": "string",
+                "description": "Token given by loginr"
+            },
+            "storeId": {
+                "type": "string",
+                "description": "Id of store, only required if user_role as user"
+            }
+        },
+        "example": {
+            "storeId": "nKMHlkjhglkjG"
+        }
+    },
+    "body": {
+        "type": "object",
+        "required": ["password", "new_password", "confirm_password"],
+        "properties": {
+            "password": {  "type": "string", "description": "old/current password" },
+            "new_password": {"type": "string", "description": "New password" },
+            "confirm_password": {  "type": "string"}
+        }, 
+        "example": {
+            "password": "gkhjgajsgdfljkagsdfhjg",
+            "new_password": "Default",
+            "confirm_password": "Default"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string"},
+                "message": {"type": "string"}
+            },
+            "example": {
+                "status": "ok",
+                "message": "Password successfulyy changed"
+            }
+        },
+        "401": {
+            "description": "Unauthorized Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "UnauthorizedError",
+                "message": "Password Not Match!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

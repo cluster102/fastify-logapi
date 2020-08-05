@@ -1,0 +1,73 @@
+
+{
+    "summary": "Get children area of givet parent id",
+    "description": "Data Function",
+    "tags": ["Data"],
+    "headers": {
+        "type": "object",
+        "description": "only needed if user_role is user",
+        "properties": {
+            "storeId": {
+                "type": "string",
+                "description": "Id of store"
+            }
+        },
+        "example": {
+            "storeId": "AYGPQKbEmWb1gWLq"
+        }
+    },
+    "querystring": {
+        "type": "object",
+        "description": "only needed if user_role is user",
+        "required": ["parentId"],
+        "properties": {
+            "parentId": { "type": "integer"}
+        },
+        "example": {
+            "parentId": 1123
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "required": ["status", "parent_id","list"],
+            "properties": {
+                "status": {"type": "string"},
+                "parent_id": { "type": "string" },
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": ["value", "label"],
+                        "properties": {
+                            "value": { "type": "string", "format": "uuid" },
+                            "label": { "type": "string" }
+                        }   
+                    }     
+                }
+            },
+            "example": {
+                "status": "ok",
+                "parent_id": "26785",
+                "list": [ { "value": 1,"label": "Jakarat Selatan - DKI Jakarta" },
+                            { "value": 2,"label": "Jakarat Barat - DKI Jakarta" },
+                            { "value": 3,"label": "Jakarat Timur - DKI Jakarta" }]
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

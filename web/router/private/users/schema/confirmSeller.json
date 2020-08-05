@@ -1,0 +1,175 @@
+
+{
+    "summary": "Register confirmation for seller user",
+    "description": "Register confirmation function",
+    "tags": ["Users"],
+    "body": {
+        "type": "object",
+        "required": ["user", "address", "password", "link", "vendor", "bank_data", "seller"],
+        "properties": {
+            "user": {
+                "type": "object", 
+                "description": "user data",
+                "required": ["role", "email", "phone", "name"],
+                "properties": {
+                    "role": { "type": "string", "enum": ["seller", "vendor", "user", "admin"], "description": "User role"},
+                    "email": {"type": "string", "format": "email"},
+                    "name": {"type": "string"},
+                    "phone": {"type": "string"}
+                }
+            },
+            "address": {
+                "type": "object", 
+                "description": "Address Data",
+                "required": ["line1", "area_id", "postcode"],
+                "properties": {
+                    "line1": { "type": "string"},
+                    "line2": {"type": "string"},
+                    "country_id": {"type": "integer"},
+                    "area_id": {"type": "integer"},
+                    "postcode": {"type": "string"}
+                }
+            },
+            "password": {"type": "string"},
+            "link": {"type": "string", "description": "Register link"},
+            "vendor": {
+                "type": "object", 
+                "required": ["name"],
+                "properties": {
+                    "name": {"type": "string"}
+                }
+            },
+            "bank_data": {
+                "type": "object", 
+                "required": ["name", "account_no", "account_name"],
+                "properties": {
+                    "name": {"type": "string", "description": "Bank Name"},
+                    "account_no": {"type": "string"},
+                    "account_name": {"type": "string"}
+                }
+            },
+            "seller": {
+                "type": "object", 
+                "required": ["name"],
+                "properties": {
+                    "name": {"type": "string"}
+                }
+            }
+        },
+        "example": {
+            "user": {
+                "name": "Han",
+                "role": "seller",
+                "email": "test@powercommerce.asia",
+                "phone": "08120919209878"
+            },
+            "address": {
+                "line1": "Gedung Sucofindo",
+                "line2": "Jl. Raya Pasar Minggu Kav. 34",
+                "area_id": "230",
+                "postcode": "12780"
+            },
+            "user_email": "han.juang@gamil.com",
+            "user_role": "seller",
+            "user_password": "test123",
+            "vendor_name": "mustikaratu"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "required": ["status", "user", "token", "img_signature"],
+            "properties": {
+                "status": {"type": "string"},
+                "user": {
+                    "type": "object",
+                    "properties": {
+                        "key": {"type": "string", "description": "key used by internal system"},
+                        "name": {"type": "string", "description": "Name of user"},
+                        "role": {"type": "string", "enum": ["admin", "vendor", "seller", "user"], "description": "Role of user"},
+                        "id": {"type": "string", "description": "current session id"},
+                        "store_url": {"type": "string", "description": "url of seller store if role is seller. only for seller user"},
+                        "store_id": {"type": "string", "description": "store_id of seller store if role is seller. only for seller user"},
+                        "vendor": {"type": "string", "description": "Vendor name"}
+                    }
+                },
+                "token": {"type": "string", "description": "token to be used by next command or request"},
+                "img_signature": {
+                    "type": "object",
+                    "required": ["image_path", "public_key", "token", "signature", "expire"],
+                    "properties": {
+                        "image_path": {"type": "string"},
+                        "public_key": {"type": "string", "description": "key for saving image to imagekit"},
+                        "token": {"type": "string", "description": "Token for submitting image to imagekit"},
+                        "signature": {"type": "string"},
+                        "expire": {"type": "integer", "description": "Expire time of these token in unix time"}
+                    }
+                }
+
+            },
+            "example": {
+                "status": "ok",
+                "user": {
+                    "key": "test@powercommerce.asia_4_mustikaratu",
+                    "name": "Juang",
+                    "role": "seller",
+                    "id": "1260980938640986709",
+                    "store_url": "https://juang.rs.resellermustikaratu.com",
+                    "store_id": "vGlkjghlknblihbnkj",
+                    "vendor": "mustikaratu"
+                },
+                "token": "hladhflkjahsdf.kajshdflkjahsdlkjfhlakjhsdflkjahsdflkjahsdlfkjhalksjdfhlkajhhsdf",
+                "img_signature": {
+                    "image_path": "/img/szdhflkjhasdf/product",
+                    "public_key": "hdlkjhadoiuykjhasdfLJKHGKLJG",
+                    "token": "hladhflkjahsdf.kajshdflkjahsdlkjfhlakjhsdflkjahsdflkjahsdlfkjhalksjdfhlkajhhsdf",
+                    "signature": "signature", 
+                    "expire": "12312341234"                    
+                }
+            }
+        },
+        "401": {
+            "description": "Unauthorized Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "UnauthorizedError",
+                "message": "Password not match!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Missing storeId attribute!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}

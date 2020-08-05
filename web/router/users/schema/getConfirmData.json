@@ -1,0 +1,103 @@
+{
+    "summary": "Confirmation link for completing register process",
+    "description": "Login function",
+    "tags": ["Users"],
+    "querystring": {
+        "type": "object",
+        "required": ["link"],
+        "properties": {
+            "link": {
+                "type": "string",
+                "description": "registerlink code"
+            }
+        },
+        "example": {
+            "storeId": "nKMHlkjhglkjG236542153654w756jhgfj"
+        }
+    },
+    "response": {
+        "200": {
+            "description": "Succesful response",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string"},
+                "user": {
+                    "type": "object",
+                    "properties": {
+                        "register_id": {"type": "integer", "description": "key used by internal system"},
+                        "name": {"type": "string", "description": "Name of user"},
+                        "role": {"type": "string", "enum": ["admin", "vendor", "seller", "user"], "description": "Role of user"},
+                        "email": {"type": "string"},
+                        "id": {"type": "string", "description": "hashed userId"},
+                        "vendor": {
+                            "type": "object", 
+                            "description": "Vendor Data",
+                            "properties": {
+                                "id": {"type": "string"},
+                                "name": {"type": "string"}
+                            }
+                        }
+                    }
+                },
+                "token": {"type": "string", "description": "token to be used by next command or request"}
+            },
+            "example": {
+                "status": "ok",
+                "user": {
+                    "register_id": 78,
+                    "name": "Juang",
+                    "role": "seller",
+                    "id": "AYGPQKbEmWb1gWLq",
+                    "email": "hanjuang@web.de",
+                    "vendor": {
+                        "id": "AYGPQKbEmWb1gWLq",
+                        "name": "mustikaratu"
+                    }
+                },
+                "token": "hladhflkjahsdf.kajshdflkjahsdlkjfhlakjhsdflkjahsdflkjahsdlfkjhalksjdfhlkajhhsdf"
+            }
+        },
+        "404": {
+            "description": "Nofound Error",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "UnauthorizedError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "NotFoundError",
+                "message": "Link not found!"
+            }
+        },
+        "422": {
+            "description": "Bad request, one or more param not included, or not match",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "BadRequestError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "BadRequestError",
+                "message": "Link expired!"
+            }
+        },
+        "500": {
+            "description": "Error on internal system",
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "description": "fail"},
+                "name": {"type": "string", "description": "InternalServerError"},
+                "message": {"type": "string", "description": "Error description"}
+            },
+            "example": {
+                "status": "fail",
+                "name": "InternalServerError",
+                "message": "Database error!"
+            }
+        }
+    }
+}
